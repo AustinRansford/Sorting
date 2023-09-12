@@ -1,43 +1,30 @@
-
-/**
- * Write a description of class Sorting here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 public class Sorting
 {
     // instance variables - replace the example below with your own
+    private static long mComparisons = 0; //mergeComparisons
+    private static long mSwaps = 0;// mergeSwaps
     private int x;
 
-    /**
-     * Constructor for objects of class Sorting
-     */
-    public Sorting()
-    {
+    public Sorting() {
         // initialise instance variables
         x = 0;
     }
 
     /**
-     * An example of a method - replace this comment with your own
+     * sorts an array of numbers according to the selection sorting procedure
      *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * @param  arr is a filled array of integers 
+     * @return   void 
      */
-     public static void selectionSort(int[] arr)
-    {
-        // put your code here
-        int comparisons = 0;
-        int swaps = 0;
-        for(int i = 0; i < arr.length - 1; i++)
-        {
+     public static void selectionSort(int[] arr) {
+        long comparisons = 0;
+        long swaps = 0;
+        
+        for (int i = 0; i < arr.length - 1; i++) {
             int minimumLocation = i;
-            for(int j = i; j < arr.length; j++)
-            {
+            for (int j = i; j < arr.length; j++) {
                 comparisons++;
-                if (arr[minimumLocation] > arr[j])
-                {
+                if (arr[minimumLocation] > arr[j]) {
                     minimumLocation = j;
     
                 }
@@ -47,167 +34,190 @@ public class Sorting
             arr[minimumLocation] = temp;
             swaps++;
         }
-        System.out.print( " " +comparisons + " , " + swaps );
-    }
-    public void selectionTest()
-    {
+        
+        System.out.print( ", " + comparisons + " , " + swaps );
+    } 
+    
+    public void selectionTest() {
         int[] arr = {70, 5, 29, 54, -4, 89, 100, 0, 0 -100, 5};
-        for (int num: arr)
-        {
+        
+        for (int num: arr) {
             System.out.print(num + " ");
         }
+        
         System.out.println("");
         selectionSort(arr);
-        for (int num: arr)
-        {
+        
+        for (int num: arr) {
             System.out.println(num);
         }
     }
     
-    public static void bubbleSort(int[] arr)
-    {
+    /**
+     * sorts an array of numbers according to the bubble sorting procedure
+     *
+     * @param  arr is a filled array of integers 
+     * @return   void 
+     */
+    public static void bubbleSort(int[] arr) {
         long comparisons = 0;
-        int swaps = 0;
-        for (int i = 0; i < arr.length -1; i++)
-        {
-            for (int j = 0; j < arr.length- 1; j++) 
-            {
+        long swaps = 0;
+        
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - 1; j++) {
                 comparisons++;
-                if (arr[j] > arr[j +1])
-                {
+                if (arr[j] > arr[j +1]) {
                     int temp = arr[j+ 1];
                     arr[j + 1] = arr[j];
                     arr[j] = temp;
                     swaps++;
-
                 }
             }
         }
-        System.out.print( " " +comparisons + " , " + swaps );
+        
+        System.out.print( ", " + comparisons + " , " + swaps );
     }
-    public  void bubbleTest()
-    {
+    
+    public  void bubbleTest() {
         int[] arr = {70, 5, 29, 54, -4, 89, 100, 0, 0 -100, 5};
-        for (int num: arr)
-        {
+        
+        for (int num: arr) {
             System.out.print(num + " ");
         }
+        
         System.out.println("");
         bubbleSort(arr);
-        for (int num: arr)
-        {
+        
+        for (int num: arr) {
             System.out.println(num);
         }
     }
-    public static void insertionSort(int[] arr)
-    {
-        int comparisons = 0;
-        int swaps = 0;
-        for (int i = 1; i < arr.length; i++)
-        {
+    
+    /**
+     * sorts an array of numbers according to the insertion sorting procedure
+     *
+     * @param  arr is a filled array of integers 
+     * @return   void 
+     */
+    public static void insertionSort(int[] arr) {
+        long comparisons = 0;
+        long swaps = 0;
+        
+        for (int i = 1; i < arr.length; i++) {
             int temp = arr[i];
             int currentLocation = i;
-            while(currentLocation > 0 && temp < arr[currentLocation - 1] )
-            {
+            while(currentLocation > 0 
+                    && temp < arr[currentLocation - 1]) {
                 comparisons++;
-                arr[currentLocation] = arr[currentLocation -1];
+                arr[currentLocation] = arr[currentLocation - 1];
                 swaps++;
                 currentLocation--;
             }
             arr[currentLocation] = temp;
             swaps++;
         }
-        System.out.print( " " +comparisons + " , " + swaps/3 );
+        
+        System.out.print( ", " + comparisons + " , " + swaps / 3 );
     }
-     public void insertionTest()
-    {
+    
+    public void insertionTest() {
         int[] arr = {70, 5, 29, 54, -4, 89, 100, 0, 0 -100, 5};
-        for (int num: arr)
-        {
+        
+        for (int num: arr) {
             System.out.print(num + " ");
         }
+        
         System.out.println("");
         insertionSort(arr);
-        for (int num: arr)
-        {
+        
+        for (int num: arr) {
             System.out.println(num);
         }
     }
-    public static void mergeSort(int[] arr)
-    {
+    
+    /**
+     * sorts an array of numbers according to the merge sorting procedure
+     *
+     * @param  arr is a filled array of integers 
+     * @return   void 
+     */
+    public static void mergeSort(int[] arr) {
         mergeSorting(0, arr.length - 1, arr);
-        
+        System.out.print( ", " + mComparisons + " , " + mSwaps );
     }
-    public static void mergeSorting(int start, int end, int[] arr)
-    {
+    
+    /**
+     * Is the recursive call to breakdown the array into pieces which then is 
+     * passed into the merge method
+     *
+     * @param  start represents the start index value of the partition  
+     * @param end represents the end index value of the partition 
+     * of arr that is being examined. 
+     * @param arr is a filled array of integers 
+     * @return   void 
+     */
+    public static void mergeSorting(int start, int end, int[] arr) {
         int mid = (end + start) / 2;
-        if(start == end)
-        {
+        
+        if (start == end) {
             return;
-        }
-        else
-        {
+        } else {
             mergeSorting(start, mid, arr);
-            mergeSorting(mid +1, end, arr);
+            mergeSorting(mid + 1, end, arr);
             merge(start, mid, end, arr);
         }
     }
-    public static void merge(int start, int mid, int end, int[] arr)
-    {
+    
+    public static void merge(int start, int mid, int end, int[] arr) {
         int i = start;
         int j = mid + 1; 
-        int[] mergedArray = new int[arr.length];
+        int[] mergedArray = new int[end - start + 1];
         int location = 0;
-        while (i <= mid && j <= end)
-        {
-            if (arr[i] < arr[j])
-            {
-                // creates new array that should be sorted in the bounds
-                //of the start and end 
+        
+        while (i <= mid && j <= end) {
+            mComparisons++;
+            if (arr[i] < arr[j]) { 
                 mergedArray[location] = arr[i];
                 i++;
                 location++;
-               // for (int num: arr)
-                //{
-                //    System.out.println(num + " ");
-               // }
-            }
-            else
-            {
+                mSwaps++;
+            } else {
                 mergedArray[location] = arr[j];
                 j++;
                 location++;
             }
         } 
-        while (i <= mid)
-        {
+        
+        while (i <= mid) {
             mergedArray[location] = arr[i];
             i++;
             location++;
+            mSwaps++;
         }
-        while (j <= end)
-        {
+        
+        while (j <= end) {
             mergedArray[location] = arr[j];
             j++;
             location++;
+            mSwaps++;
         }
         
-        for (int c = start; c <= end; c++)
-        {
+        for (int c = start; c <= end; c++) {
             arr[c] = mergedArray[c - start];
         }
     }
-    public void mergeTest()
-    {
+    
+    public void mergeTest() {
         int[] arr = {70, 5, 29, 54, -4, 89, 100, 0, 0 -100, 5};
-        for (int num: arr)
-        {
+        
+        for (int num: arr) {
             System.out.print(num + " ");
         }
+        
         System.out.println("");
         mergeSort(arr);
-        for (int num: arr)
-        {
+        
+        for (int num: arr) {
             System.out.println(num);
         }
     }
