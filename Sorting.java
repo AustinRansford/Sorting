@@ -142,7 +142,7 @@ public class Sorting
      * @return   void 
      */
     public static void mergeSort(int[] arr) {
-        mergeSorting(0, arr.length - 1, arr);
+        mergeSort(0, arr.length - 1, arr);
         System.out.print( ", " + mComparisons + " , " + mSwaps );
     }
     
@@ -156,19 +156,19 @@ public class Sorting
      * @param arr is a filled array of integers 
      * @return   void 
      */
-    public static void mergeSorting(int start, int end, int[] arr) {
+    public static void mergeSort(int start, int end, int[] arr) {
         int mid = (end + start) / 2;
         
         if (start == end) {
             return;
         } else {
-            mergeSorting(start, mid, arr);
-            mergeSorting(mid + 1, end, arr);
-            merge(start, mid, end, arr);
+            mergeSort(start, mid, arr);
+            mergeSort(mid + 1, end, arr);
+            mergeSort(start, mid, end, arr);
         }
     }
     
-    public static void merge(int start, int mid, int end, int[] arr) {
+    public static void mergeSort(int start, int mid, int end, int[] arr) {
         int i = start;
         int j = mid + 1; 
         int[] mergedArray = new int[end - start + 1];
