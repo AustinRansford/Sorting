@@ -26,13 +26,15 @@ public class Sorting
                 comparisons++;
                 if (arr[minimumLocation] > arr[j]) {
                     minimumLocation = j;
-    
                 }
             }
-            int temp = arr[i];
-            arr[i] = arr[minimumLocation];
-            arr[minimumLocation] = temp;
-            swaps++;
+            comparisons++;
+            if ( minimumLocation != i){
+                int temp = arr[i];
+                arr[i] = arr[minimumLocation];
+                arr[minimumLocation] = temp;
+                swaps++;
+            }
         }
         
         System.out.print( ", " + comparisons + " , " + swaps );
@@ -64,14 +66,19 @@ public class Sorting
         long swaps = 0;
         
         for (int i = 0; i < arr.length - 1; i++) {
-            for (int j = 0; j < arr.length - 1; j++) {
+            boolean sorted = true;
+            for (int j = 0; j < arr.length - i - 1; j++) {
                 comparisons++;
                 if (arr[j] > arr[j +1]) {
+                    sorted = false;
                     int temp = arr[j+ 1];
                     arr[j + 1] = arr[j];
                     arr[j] = temp;
                     swaps++;
                 }
+            }
+            if (sorted){
+                break;
             }
         }
         
@@ -161,6 +168,13 @@ public class Sorting
         
         if (start == end) {
             return;
+        } else if (end - start == 2){
+            if (arr[end] < arr[start]) {
+                int temp = arr[end];
+                arr[end] = arr[start];
+                arr[start] = temp;
+                return;
+            }
         } else {
             mergeSort(start, mid, arr);
             mergeSort(mid + 1, end, arr);
